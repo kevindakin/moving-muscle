@@ -305,6 +305,12 @@ function resourceModal() {
       wrap.style.display = "flex";
       tl.play();
 
+      // Push event to GTM when modal opens
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "lead_magnet_opened",
+      });
+
       // Accessibility
       wrap.removeAttribute("inert");
       wrap.setAttribute("aria-hidden", "false");
@@ -349,10 +355,8 @@ function resourceModal() {
     }
 
     function trapFocus(e) {
-      // Only proceed if Tab is pressed
       if (e.key !== "Tab") return;
 
-      // Query focusable elements within the modal_wrap only
       const focusableElements = Array.from(
         modal.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -371,7 +375,6 @@ function resourceModal() {
       const isFirstElement = document.activeElement === firstFocusable;
       const isLastElement = document.activeElement === lastFocusable;
 
-      // Handle focus cycling
       if (e.shiftKey && isFirstElement) {
         e.preventDefault();
         lastFocusable.focus();
@@ -380,7 +383,6 @@ function resourceModal() {
         firstFocusable.focus();
       }
 
-      // If focus somehow gets outside the modal, force it back in
       if (!modal.contains(document.activeElement)) {
         e.preventDefault();
         firstFocusable.focus();
@@ -396,8 +398,6 @@ function resourceModal() {
     // Event Listeners
     trigger.addEventListener("click", openModal);
     closeBtns.forEach((button) => button.addEventListener("click", closeModal));
-
-    // Close on background click
     wrap.addEventListener("click", (e) => {
       if (e.target === wrap) closeModal();
     });
