@@ -3,6 +3,10 @@ function blogCarousel() {
     const slider = wrapper.querySelector(".blog-carousel_cms.swiper");
     const arrowPrev = wrapper.querySelector(".blog-carousel_arrow.swiper-prev");
     const arrowNext = wrapper.querySelector(".blog-carousel_arrow.swiper-next");
+
+    if (!wrapper) {
+      return;
+    }
   
     let swiper = new Swiper(slider, {
       slidesPerView: 1.2,
