@@ -426,11 +426,11 @@ function splitText() {
   }
 
   headings.forEach((heading) => {
-    gsap.set(el, { opacity: 0, y: "3rem" });
+    gsap.set(heading, { opacity: 0, y: "3rem" });
 
     let fadeUp = gsap.timeline({
       scrollTrigger: {
-        trigger: el,
+        trigger: heading,
         start: "top 85%",
         toggleActions: "play none none reverse",
       },
@@ -440,7 +440,7 @@ function splitText() {
       },
     });
 
-    fadeUp.to(el, {
+    fadeUp.to(heading, {
       opacity: 1,
       y: "0rem",
     });
