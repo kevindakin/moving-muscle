@@ -14,12 +14,12 @@ function loader() {
   const split = document.querySelector('[data-load="split"]');
   const fadeLeft = document.querySelectorAll('[data-load="fade-left"]');
 
-  const headlineSplit = new SplitType(split, {
-    types: "lines, words",
-    tagName: "span",
-  });
+  // const headlineSplit = new SplitType(split, {
+  //   types: "lines, words",
+  //   tagName: "span",
+  // });
 
-  const splitText = split.querySelectorAll(".word");
+  // const splitText = split.querySelectorAll(".word");
 
   let tl = gsap.timeline({
     defaults: {
@@ -45,9 +45,10 @@ function loader() {
       "<0.1"
     )
     .from(
-      splitText,
+      split,
       {
-        y: "110%",
+        y: "3rem",
+        opacity: 0,
         stagger: 0.05,
       },
       "<0.7"
@@ -425,18 +426,11 @@ function splitText() {
   }
 
   headings.forEach((heading) => {
-    const headlineSplit = new SplitType(heading, {
-      types: "lines, words",
-      tagName: "span",
-    });
+    gsap.set(el, { opacity: 0, y: "3rem" });
 
-    const splitText = heading.querySelectorAll(".word");
-
-    gsap.set(splitText, { y: "110%" });
-
-    let splitAnim = gsap.timeline({
+    let fadeUp = gsap.timeline({
       scrollTrigger: {
-        trigger: heading,
+        trigger: el,
         start: "top 85%",
         toggleActions: "play none none reverse",
       },
@@ -446,11 +440,39 @@ function splitText() {
       },
     });
 
-    splitAnim.to(splitText, {
-      y: "0%",
-      stagger: 0.05,
+    fadeUp.to(el, {
+      opacity: 1,
+      y: "0rem",
     });
   });
+
+  // headings.forEach((heading) => {
+  //   const headlineSplit = new SplitType(heading, {
+  //     types: "lines, words",
+  //     tagName: "span",
+  //   });
+
+    // const splitText = heading.querySelectorAll(".word");
+
+    // gsap.set(splitText, { y: "110%" });
+
+    // let splitAnim = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: heading,
+    //     start: "top 85%",
+    //     toggleActions: "play none none reverse",
+    //   },
+    //   defaults: {
+    //     duration: durationBase,
+    //     ease: "power3.out",
+    //   },
+    // });
+
+    // splitAnim.to(splitText, {
+    //   y: "0%",
+    //   stagger: 0.05,
+    // });
+  // });
 }
 
 function fadeUp() {
