@@ -38,10 +38,10 @@ function priceCalculator() {
   }
 
   function calculateResult() {
-    const formulaResult = 50 * radioNumber * sliderNumber - 1;
+    const formulaResult = 59 * radioNumber * sliderNumber - 1;
     result.textContent = formatNumber(formulaResult);
 
-    const differenceValue = Math.round((formulaResult + 1) / 0.57);
+    const differenceValue = Math.round((formulaResult + 1) / 0.524);
     difference.textContent = formatNumber(differenceValue);
   }
 
