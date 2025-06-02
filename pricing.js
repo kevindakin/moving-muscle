@@ -25,6 +25,11 @@ function priceCalculator() {
   const result = wrapper.querySelector('[data-pricing="result"]');
   const difference = wrapper.querySelector('[data-pricing="difference"]');
 
+  const percent = parseFloat(wrapper.getAttribute("data-percent")) || 0;
+  const rate = parseFloat(wrapper.getAttribute("data-rate")) || 0;
+  const hasDiscount = wrapper.getAttribute("data-discount") === "true"; // ✅ Boolean check
+  const percentFinal = 1 - percent;
+
   let sliderNumber = parseInt(slider.value, 10);
   let radioNumber = parseInt(
     document.querySelector("input:checked")?.value || 0,
@@ -38,10 +43,15 @@ function priceCalculator() {
   }
 
   function calculateResult() {
-    const formulaResult = 59 * radioNumber * sliderNumber;
+    let formulaResult = rate * radioNumber * sliderNumber;
+
+    if (hasDiscount) {
+      formulaResult -= 1; // ✅ Apply discount
+    }
+
     result.textContent = formatNumber(formulaResult);
 
-    const differenceValue = Math.round((formulaResult) / 0.524);
+    const differenceValue = Math.round(formulaResult / percentFinal);
     difference.textContent = formatNumber(differenceValue);
   }
 
