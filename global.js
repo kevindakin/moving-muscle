@@ -116,7 +116,7 @@ function mobileMenu() {
 
 function navDropdown() {
   const nav = document.querySelector('[data-menu="nav"]');
-  const items = nav.querySelectorAll('[data-menu="link"]');
+  const items = document.querySelectorAll('[data-menu="link"]');
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
  if (!nav || !items.length) return;
