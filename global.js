@@ -178,8 +178,10 @@ function navDropdown() {
 
 function navScroll() {
   const nav = document.querySelector('[data-menu="nav"]');
-  const border = nav.querySelector(".nav_border");
+  const border = document.querySelector(".nav_border");
   const hero = document.querySelector('[data-menu="hero"]');
+
+  if (!nav || !border || !hero) return;
 
   const navHeight = nav.offsetHeight;
 
