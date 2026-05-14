@@ -119,6 +119,8 @@ function navDropdown() {
   const items = nav.querySelectorAll('[data-menu="link"]');
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
+ if (!nav || !items.length) return;
+
   items.forEach((item) => {
     const link = item.querySelector(".nav_link");
     const menu = item.querySelector('[data-menu="menu"]');
